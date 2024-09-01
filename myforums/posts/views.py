@@ -37,16 +37,20 @@ def show_form(request):
   context['form'] = PostForm()
   return render(request, "create_post.html", context)
 
+
 def create_form(request):
-  if request.method == "POST":
-    form = PostForm(request.POST)
-    if form.is_valid():
-      post = form.save(commit=False)
-      post.author = request.POST['author']
-      post.topic = request.POST['topic']
-      post.content = request.POST['content']
-      post.save()
-  return redirect("create_post")
+    if request.method == "POST":
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Post created successfully!')
+            return redirect("create_a_post")
+        else:
+            messages.error(request, 'Error creating post. Please check the form fields.')
+    else:
+        form = PostForm()
+
+    return render(request, "create_post.html", {'form': form})
 
 def get_post_by_topic(request, topic):
   posts = Posts.objects.filter(topic=topic)

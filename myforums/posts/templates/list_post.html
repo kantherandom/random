@@ -2,4 +2,11 @@
     <p>{{post.author}}</p>
     <p>{{post.topic}}</p>
     <p>{{post.content}}</p>
+    <!-- Display the image -->
+    {% if post.image %}
+        <img src="{{ post.image.url }}" alt="Post Image" style="max-width: 100px; height: auto;">
+    {% else %}
+        <p>No image available.</p>
+    {% endif %}
+    <hr>
 {% endfor %}

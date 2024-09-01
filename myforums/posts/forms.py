@@ -8,11 +8,10 @@ class PostForm(forms.ModelForm):
                    ('Rants', 'Rants'), ('munsic', "Music"), ('Photography', 'Photography'), 
                    ('tech', 'Technology'), ('food', 'Food'), ('offtopic', 'Random'))
         model = posts
-        fields = ['author', 'topic', 'content']
+        fields = ['author', 'topic', 'content', 'image']
 
         widgets = {
             'content': forms.TextInput(attrs={'class':'form-control'}),
             'topic': forms.Select(choices=CHOICES),
-            'author': forms.TextInput(attrs={'class':'form-control' }),
-            'image':forms.ImageField
+            'author': forms.TextInput(attrs={'class':'form-control' })
             }
